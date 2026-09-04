@@ -1,0 +1,95 @@
+{
+  "categories": [
+    {
+      "code": "A",
+      "id": "bubble-tea",
+      "label": "Bubble teas",
+      "kind": "drink",
+      "sortOrder": 10
+    },
+    {
+      "code": "E",
+      "id": "fruit-tea",
+      "label": "Fruit teas",
+      "kind": "drink",
+      "sortOrder": 50
+    }
+  ],
+  "products": [
+    {
+      "id": "A01",
+      "name": "Brown Sugar Milk Tea",
+      "category": "bubble-tea",
+      "description": "Caramel swirls. Creamy milk tea. Chewy little pearls of joy.",
+      "price": 6.5,
+      "image": "/menu-images/A01.png",
+      "colour": "peach",
+      "tag": "The classic",
+      "favourite": true,
+      "hotAvailable": true,
+      "isDrink": true,
+      "allergens": "Ask staff for allergen information",
+      "sortOrder": 10
+    },
+    {
+      "id": "A02",
+      "name": "Taro Milk Tea",
+      "category": "bubble-tea",
+      "description": "Soft, nutty and wonderfully purple. Your cosy sip, sorted.",
+      "price": 6.5,
+      "image": "/menu-images/A02.png",
+      "colour": "lilac",
+      "tag": "A little dreamy",
+      "favourite": true,
+      "hotAvailable": true,
+      "isDrink": true,
+      "allergens": "Ask staff for allergen information",
+      "sortOrder": 20
+    },
+    {
+      "id": "A03",
+      "name": "Mango Milk Tea",
+      "category": "bubble-tea",
+      "description": "Sweet mango meets creamy milk. A tiny tropical escape.",
+      "price": 6.5,
+      "image": "/menu-images/A03.png",
+      "colour": "butter",
+      "tag": "Sunshine in a cup",
+      "favourite": true,
+      "hotAvailable": true,
+      "isDrink": true,
+      "allergens": "Ask staff for allergen information",
+      "sortOrder": 30
+    },
+    {
+      "id": "E01",
+      "name": "Peach & Lychee",
+      "category": "fruit-tea",
+      "description": "Peachy, fragrant and refreshingly fruity. Pop, sip, repeat.",
+      "price": 6.5,
+      "image": "/menu-images/E01.png",
+      "colour": "sage",
+      "tag": "Feeling fruity",
+      "favourite": true,
+      "hotAvailable": false,
+      "isDrink": true,
+      "allergens": "Ask staff for allergen information",
+      "sortOrder": 10
+    },
+    {
+      "id": "E02",
+      "name": "Strawberry Fruit Tea",
+      "category": "fruit-tea",
+      "description": "A berry-bright tea with popping boba. A very good mood.",
+      "price": 6.5,
+      "image": "/menu-images/E02.png",
+      "colour": "pink",
+      "tag": "Berry good",
+      "favourite": false,
+      "hotAvailable": false,
+      "isDrink": true,
+      "allergens": "Ask staff for allergen information",
+      "sortOrder": 20
+    }
+  ]
+}

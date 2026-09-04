@@ -587,6 +587,19 @@ h2 {
   background: var(--cream);
   color: var(--ink);
 }
+.product-id {
+  position: absolute;
+  z-index: 1;
+  top: 14px;
+  right: 13px;
+  padding: 6px 9px;
+  border-radius: 20px;
+  color: var(--cream);
+  background: var(--ink);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
 .product-add {
   position: absolute;
   bottom: 13px;

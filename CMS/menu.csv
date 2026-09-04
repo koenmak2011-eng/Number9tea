@@ -1,0 +1,6 @@
+id,name,description,price,tag,featured,hot_available,active,colour,sort_order,allergens
+A01,Brown Sugar Milk Tea,Caramel swirls. Creamy milk tea. Chewy little pearls of joy.,6.50,The classic,true,true,true,peach,10,Ask staff for allergen information
+A02,Taro Milk Tea,"Soft, nutty and wonderfully purple. Your cosy sip, sorted.",6.50,A little dreamy,true,true,true,lilac,20,Ask staff for allergen information
+A03,Mango Milk Tea,Sweet mango meets creamy milk. A tiny tropical escape.,6.50,Sunshine in a cup,true,true,true,butter,30,Ask staff for allergen information
+E01,Peach & Lychee,"Peachy, fragrant and refreshingly fruity. Pop, sip, repeat.",6.50,Feeling fruity,true,false,true,sage,10,Ask staff for allergen information
+E02,Strawberry Fruit Tea,A berry-bright tea with popping boba. A very good mood.,6.50,Berry good,false,false,true,pink,20,Ask staff for allergen information

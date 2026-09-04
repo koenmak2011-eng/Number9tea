@@ -44,9 +44,18 @@ Dependencies are locked in `package-lock.json`. No environment variables, API ke
 
 ## Updating shop content
 
-Edit the `shop` and `products` exports in `src/lib/shop.ts`. A product's `image` is a path under `public/`; its `price` is a number or `null` when unconfirmed. To display confirmed opening hours, replace `shop.openingHours: null` with entries such as `{ days: "Monday", hours: "Owner-confirmed hours" }`.
+The main menu is generated from `CMS/menu.csv`. Each active row uses a unique ID such as `A01` and requires a matching image at `CMS/images/A01.png`. The leading letter maps to a category in `CMS/categories.csv`; categories with no active items are hidden automatically.
 
-Drink names, photos and £6.50 guide prices were sourced from [No.9's public Deliveroo menu](https://deliveroo.co.uk/menu/birmingham/wolverhampton-city-centre/no9-bubble-tea-50-lichfield-street), checked on 4 September 2026. The page clearly identifies these as delivery-menu guide prices, which may differ from collection prices. See [ASSETS.md](ASSETS.md) for asset provenance.
+```bash
+npm run cms:check    # Validate CSV values, IDs and images
+npm run cms:sync     # Regenerate web menu data and public images
+```
+
+Both `npm run dev` and `npm run build` run the sync automatically. A GitHub-connected deployment therefore rebuilds the menu whenever the CSV or CMS images change. See [CMS/README.md](CMS/README.md) for the complete column guide and category mapping.
+
+General shop information and WhatsApp helpers remain in `src/lib/shop.ts`. To display confirmed opening hours, replace `shop.openingHours: null` with entries such as `{ days: "Monday", hours: "Owner-confirmed hours" }`.
+
+The starter drink names, photos and £6.50 guide prices were sourced from [No.9's public Deliveroo menu](https://deliveroo.co.uk/menu/birmingham/wolverhampton-city-centre/no9-bubble-tea-50-lichfield-street), checked on 4 September 2026. The page clearly identifies these as delivery-menu guide prices, which may differ from collection prices. See [ASSETS.md](ASSETS.md) for asset provenance.
 
 The owner's brief supplies the address, WhatsApp number, dessert names and merchandise categories. **Still needed from the owner:** confirmed opening hours, collection prices, dessert photography and prices, and actual merchandise photographs/current stock. Until supplied, the hours block links to WhatsApp, desserts use decorative artwork with “Ask us” pricing, and the merchandise boxes are an illustrative interaction rather than a representation of actual packaging or stock. The location illustration is decorative; the directions link opens Google Maps for the exact address.
 

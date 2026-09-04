@@ -10,13 +10,20 @@ export const shop = {
     "https://deliveroo.co.uk/menu/birmingham/wolverhampton-city-centre/no9-bubble-tea-50-lichfield-street",
 };
 
-export type Category =
-  "favourites" | "bubble-tea" | "fruit-tea" | "cafe-treats";
+export type Category = string;
+
+export type MenuCategory = {
+  code: string;
+  id: string;
+  label: string;
+  kind: "drink" | "food";
+  sortOrder: number;
+};
 
 export type Product = {
   id: string;
   name: string;
-  category: Exclude<Category, "favourites">;
+  category: Category;
   description: string;
   price: number | null;
   image: string | null;
@@ -24,6 +31,9 @@ export type Product = {
   tag: string;
   favourite: boolean;
   hotAvailable?: boolean;
+  isDrink?: boolean;
+  allergens?: string;
+  sortOrder?: number;
 };
 
 export const products: Product[] = [
@@ -110,8 +120,11 @@ export const products: Product[] = [
   },
 ];
 
-export function filterProducts(category: Category): Product[] {
-  return products.filter((product) =>
+export function filterProducts(
+  category: Category,
+  source: Product[] = products,
+): Product[] {
+  return source.filter((product) =>
     category === "favourites"
       ? product.favourite
       : product.category === category,
@@ -132,7 +145,7 @@ export function orderMessage(
   notes: string,
 ): string {
   const count = Math.max(1, Math.min(9, Math.floor(quantity) || 1));
-  const drink = product.category !== "cafe-treats";
+  const drink = product.isDrink ?? product.category !== "cafe-treats";
   const lines = [
     "Hi No.9! I'd like to order:",
     `${count} x ${product.name}`,

@@ -4,7 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "cms:sync": "node scripts/sync-cms.mjs",
+    "cms:check": "node scripts/sync-cms.mjs --check",
+    "predev": "npm run cms:sync",
     "dev": "next dev --hostname 0.0.0.0",
+    "prebuild": "npm run cms:sync",
     "build": "next build",
     "start": "next start --hostname 0.0.0.0",
     "lint": "eslint .",

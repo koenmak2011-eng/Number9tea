@@ -12,6 +12,8 @@ The photographs below were downloaded from image URLs displayed in [No.9 Bubble 
 | `public/images/peach-lychee.jpg`         | [Peach and lychee tea](https://rs-menus-api.roocdn.com/images/798a9fda-3b40-4376-b5ee-fbad6ede4d8c/image.jpeg) |
 | `public/images/strawberry-fruit-tea.jpg` | [Strawberry fruit tea](https://rs-menus-api.roocdn.com/images/32fd8ec8-4956-413d-80fb-b1077b155210/image.jpeg) |
 
+The starter files in `CMS/images/` are size-optimised PNG conversions of the matching photographs above. Their CMS IDs are `A01` (brown sugar), `A02` (taro), `A03` (mango), `E01` (peach and lychee) and `E02` (strawberry). `public/menu-images/` is generated from these files and is not committed.
+
 ## Owner-supplied logo
 
 `public/images/no9-logo.jpg` is an unchanged copy of the logo supplied by the owner as `OKTEST.jpg` on 4 September 2026. The `/club` route displays it as the primary brand mark.

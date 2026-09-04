@@ -32,6 +32,7 @@ import {
 } from "@phosphor-icons/react";
 import {
   type Category,
+  type MenuCategory,
   type Product,
   filterProducts,
   orderMessage,
@@ -40,13 +41,6 @@ import {
 } from "@/lib/shop";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
-
-const categories: { id: Category; label: string }[] = [
-  { id: "favourites", label: "The favourites" },
-  { id: "bubble-tea", label: "Bubble teas" },
-  { id: "fruit-tea", label: "Fruit teas" },
-  { id: "cafe-treats", label: "Café treats" },
-];
 
 const surprises = [
   {
@@ -245,6 +239,7 @@ function ProductCard({
         aria-label={`Choose ${product.name}`}
       >
         <span className="product-tag">{product.tag}</span>
+        <span className="product-id">{product.id}</span>
         {product.image ? (
           <Image
             src={product.image}
@@ -290,6 +285,9 @@ function OrderDialog({
   const [temperature, setTemperature] = useState<"Iced" | "Hot">("Iced");
   const [sweetness, setSweetness] = useState("Regular");
   const [notes, setNotes] = useState("");
+  const isDrink = product
+    ? (product.isDrink ?? product.category !== "cafe-treats")
+    : false;
 
   useEffect(() => {
     if (product) {
@@ -344,7 +342,7 @@ function OrderDialog({
             )}
           </div>
           <div className="dialog-copy">
-            <p className="eyebrow">YOUR NEXT LITTLE HAPPY</p>
+            <p className="eyebrow">YOUR NEXT LITTLE HAPPY · {product.id}</p>
             <h2 id="order-title">{product.name}</h2>
             <p>{product.description}</p>
             <div className="quantity-row">
@@ -371,7 +369,7 @@ function OrderDialog({
                 </button>
               </div>
             </div>
-            {product.category !== "cafe-treats" && (
+            {isDrink && (
               <div className="order-options">
                 <label htmlFor="order-temperature">
                   Temperature
@@ -413,7 +411,9 @@ function OrderDialog({
             </label>
             <p className="order-note">
               We’ll confirm today’s price, options and collection time in the
-              chat. Please tell us about any allergies before ordering.
+              chat.{" "}
+              {product.allergens ||
+                "Please tell us about any allergies before ordering."}
             </p>
             <OrderLink
               message={orderMessage(
@@ -436,7 +436,13 @@ function OrderDialog({
   );
 }
 
-export function LandingPage() {
+export function LandingPage({
+  menuProducts,
+  menuCategories,
+}: {
+  menuProducts: Product[];
+  menuCategories: MenuCategory[];
+}) {
   const root = useRef<HTMLDivElement>(null);
   const [category, setCategory] = useState<Category>("favourites");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -444,7 +450,11 @@ export function LandingPage() {
   const [marqueePaused, setMarqueePaused] = useState(false);
   const [openBox, setOpenBox] = useState<number | null>(null);
   const [activeBox, setActiveBox] = useState(0);
-  const visibleProducts = filterProducts(category);
+  const categories: { id: Category; label: string }[] = [
+    { id: "favourites", label: "The favourites" },
+    ...menuCategories.map(({ id, label }) => ({ id, label })),
+  ];
+  const visibleProducts = filterProducts(category, menuProducts);
 
   useGSAP(
     () => {

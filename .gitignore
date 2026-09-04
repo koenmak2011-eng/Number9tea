@@ -7,3 +7,4 @@ out/
 !.env.example
 next-env.d.ts
 npm-debug.log*
+public/menu-images/

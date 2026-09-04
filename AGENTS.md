@@ -4,7 +4,7 @@ Whatever action you can do yourself, please do yourself, this include starting a
 
 ## Project Structure & Module Organization
 
-This Next.js 16 App Router project has three No.9 Bubble Tea concepts: `/`, `/club` and `/final`. Routes, metadata and styles live in `src/app/`; page interactions live in `src/components/`; product data and WhatsApp helpers live in `src/lib/shop.ts`. Tests are in `tests/`. Next.js serves images and fonts from `public/`. Project-local skills live in `.agents/skills/`.
+This Next.js 16 App Router project has three No.9 Bubble Tea concepts: `/`, `/club` and `/final`. Routes and styles live in `src/app/`; interactions live in `src/components/`; CMS source files live in `CMS/`; generated menu data lives in `src/generated/`; shop and WhatsApp helpers live in `src/lib/shop.ts`. Tests are in `tests/`. Next.js serves images and fonts from `public/`.
 
 ## Build, Test, and Development Commands
 
@@ -12,6 +12,8 @@ Use Node.js 24+ and install dependencies with `npm install`.
 
 - `npm run dev`: start the app at `http://localhost:3000`.
 - `npm run build` / `npm start`: build and serve production output.
+- `npm run cms:check`: validate menu CSV rows and matching PNG files.
+- `npm run cms:sync`: regenerate menu data and public menu images.
 - `npm run lint` / `npm run typecheck`: check ESLint and TypeScript.
 - `npm test`: run ordering and menu-filter tests.
 - `npm run format`: apply Prettier to source, tests and root documents.
@@ -24,7 +26,7 @@ Use TypeScript, two-space indentation, double quotes and semicolons. Follow Pret
 
 ## Testing Guidelines
 
-Use Node's test runner with `tests/*.test.ts`. Test observable behaviour, particularly menu filtering and encoded WhatsApp messages. No coverage threshold is configured. Check desktop and mobile layouts, image loading, keyboard navigation and browser errors for visual changes.
+Use Node's test runner with `tests/*.test.ts`. Test observable behaviour, particularly menu filtering and encoded WhatsApp messages. Run `npm run cms:check` after every CMS edit. No coverage threshold is configured. Check desktop and mobile layouts, image loading, keyboard navigation and browser errors for visual changes.
 
 ## Commit & Pull Request Guidelines
 
