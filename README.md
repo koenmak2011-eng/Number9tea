@@ -61,7 +61,7 @@ The owner's brief supplies the address, WhatsApp number, dessert names and merch
 
 ## Behaviour and accessibility
 
-Product selection opens a keyboard-accessible dialog. Quantity, drink preferences and notes are URL-encoded into a message to `https://wa.me/447766628285`. The customer sends the message in WhatsApp; the website does not send messages, take payment or promise availability. Closing the dialog restores focus and page scrolling.
+Product selection opens a keyboard-accessible configuration dialog. Customers can add several configured products to a basket, adjust quantities, remove lines and continue shopping. The complete basket—including CMS IDs, drink preferences and notes—is URL-encoded into one message to `https://wa.me/447766628285`. The customer sends the message in WhatsApp; the website does not send messages, take payment or promise availability. Closing either dialog restores focus and page scrolling.
 
 GSAP provides desktop pinning and scroll-linked text reveals. Motion respects `prefers-reduced-motion`, and the marquee has a pause control. Fonts and product images are self-hosted; there are no analytics or embedded third-party maps.
 

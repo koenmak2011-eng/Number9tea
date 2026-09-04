@@ -26,7 +26,7 @@ Use TypeScript, two-space indentation, double quotes and semicolons. Follow Pret
 
 ## Testing Guidelines
 
-Use Node's test runner with `tests/*.test.ts`. Test observable behaviour, particularly menu filtering and encoded WhatsApp messages. Run `npm run cms:check` after every CMS edit. No coverage threshold is configured. Check desktop and mobile layouts, image loading, keyboard navigation and browser errors for visual changes.
+Use Node's test runner with `tests/*.test.ts`. Test observable behaviour, particularly menu filtering, basket totals and encoded WhatsApp messages. Run `npm run cms:check` after every CMS edit. No coverage threshold is configured. Check desktop and mobile layouts, image loading, keyboard navigation and browser errors for visual changes.
 
 ## Commit & Pull Request Guidelines
 

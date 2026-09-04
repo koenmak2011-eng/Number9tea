@@ -36,6 +36,14 @@ export type Product = {
   sortOrder?: number;
 };
 
+export type CartOrderLine = {
+  product: Product;
+  quantity: number;
+  temperature: "Iced" | "Hot";
+  sweetness: string;
+  notes: string;
+};
+
 export const products: Product[] = [
   {
     id: "brown-sugar",
@@ -159,4 +167,38 @@ export function orderMessage(
     "Could you confirm availability, options, price and collection time? Thank you!",
   ];
   return lines.join("\n");
+}
+
+export function cartMessage(lines: CartOrderLine[]): string {
+  const itemLines = lines.flatMap((line, index) => {
+    const count = Math.max(1, Math.min(9, Math.floor(line.quantity) || 1));
+    const drink =
+      line.product.isDrink ?? line.product.category !== "cafe-treats";
+    return [
+      `${index + 1}. ${count} x ${line.product.name} (${line.product.id})`,
+      ...(drink
+        ? [
+            `   Temperature: ${line.product.hotAvailable ? line.temperature : "Iced"}`,
+            `   Sweetness: ${line.sweetness}`,
+          ]
+        : []),
+      ...(line.notes.trim() ? [`   Notes: ${line.notes.trim()}`] : []),
+    ];
+  });
+  const knownTotal = lines.reduce(
+    (total, line) => total + (line.product.price ?? 0) * line.quantity,
+    0,
+  );
+  const hasKnownPrice = lines.some((line) => line.product.price !== null);
+
+  return [
+    "Hi No.9! I'd like to order:",
+    "",
+    ...itemLines,
+    ...(hasKnownPrice
+      ? ["", `Menu price estimate: £${knownTotal.toFixed(2)}`]
+      : []),
+    "",
+    "Could you confirm availability, final price and collection time? Thank you!",
+  ].join("\n");
 }

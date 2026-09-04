@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  cartMessage,
   filterProducts,
   orderMessage,
   products,
@@ -53,4 +54,28 @@ test("menu filters return only the selected category", () => {
       ),
     );
   }
+});
+
+test("cart message combines configured items into one WhatsApp order", () => {
+  const message = cartMessage([
+    {
+      product: products[0],
+      quantity: 2,
+      temperature: "Hot",
+      sweetness: "Less sweet",
+      notes: "One with less ice",
+    },
+    {
+      product: products[4],
+      quantity: 1,
+      temperature: "Iced",
+      sweetness: "Regular",
+      notes: "",
+    },
+  ]);
+
+  assert.match(message, /1\. 2 x Brown Sugar Milk Tea/);
+  assert.match(message, /2\. 1 x Strawberry Fruit Tea/);
+  assert.match(message, /Temperature: Hot/);
+  assert.match(message, /Menu price estimate: £19\.50/);
 });

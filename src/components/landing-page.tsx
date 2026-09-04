@@ -28,14 +28,17 @@ import {
   Cookie,
   FacebookLogo,
   InstagramLogo,
+  ShoppingCart,
   TiktokLogo,
+  Trash,
 } from "@phosphor-icons/react";
 import {
+  type CartOrderLine,
   type Category,
   type MenuCategory,
   type Product,
+  cartMessage,
   filterProducts,
-  orderMessage,
   shop,
   whatsappUrl,
 } from "@/lib/shop";
@@ -116,6 +119,8 @@ const deliveryLinks = [
     mark: "TGTG",
   },
 ];
+
+type CartItem = CartOrderLine & { key: string };
 
 function Brand({ footer = false }: { footer?: boolean }) {
   return (
@@ -276,9 +281,11 @@ function ProductCard({
 function OrderDialog({
   product,
   onClose,
+  onAdd,
 }: {
   product: Product | null;
   onClose: () => void;
+  onAdd: (line: CartOrderLine) => void;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [quantity, setQuantity] = useState(1);
@@ -415,23 +422,196 @@ function OrderDialog({
               {product.allergens ||
                 "Please tell us about any allergies before ordering."}
             </p>
-            <OrderLink
-              message={orderMessage(
-                product,
-                quantity,
-                temperature,
-                sweetness,
-                notes,
-              )}
+            <button
+              className="button button-red dialog-add-button"
+              onClick={() => {
+                onAdd({ product, quantity, temperature, sweetness, notes });
+                close();
+              }}
             >
-              Continue on WhatsApp
-            </OrderLink>
+              <ShoppingCart size={20} weight="fill" />
+              Add to order
+              <Plus size={18} weight="bold" />
+            </button>
             <span className="dialog-footnote">
-              Opens a pre-filled chat. Send it when you’re ready.
+              Add more items, then send the whole order on WhatsApp.
             </span>
           </div>
         </div>
       )}
+    </dialog>
+  );
+}
+
+function CartDialog({
+  open,
+  items,
+  onClose,
+  onQuantity,
+  onRemove,
+}: {
+  open: boolean;
+  items: CartItem[];
+  onClose: () => void;
+  onQuantity: (key: string, quantity: number) => void;
+  onRemove: (key: string) => void;
+}) {
+  const dialog = useRef<HTMLDialogElement>(null);
+  const itemCount = items.reduce((total, item) => total + item.quantity, 0);
+  const knownTotal = items.reduce(
+    (total, item) => total + (item.product.price ?? 0) * item.quantity,
+    0,
+  );
+
+  useEffect(() => {
+    const element = dialog.current;
+    if (!element) return;
+    if (open && !element.open) {
+      const trigger = document.activeElement as HTMLElement | null;
+      element.showModal();
+      const overflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        element.close();
+        document.body.style.overflow = overflow;
+        trigger?.focus({ preventScroll: true });
+      };
+    }
+    if (!open && element.open) element.close();
+  }, [open]);
+
+  return (
+    <dialog
+      ref={dialog}
+      className="cart-dialog"
+      aria-labelledby="cart-title"
+      onCancel={onClose}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <div className="cart-shell">
+        <header className="cart-head">
+          <div>
+            <p className="eyebrow">YOUR NO.9 ORDER</p>
+            <h2 id="cart-title">Good choices.</h2>
+          </div>
+          <button
+            className="icon-button"
+            onClick={onClose}
+            aria-label="Close order basket"
+          >
+            <X size={24} />
+          </button>
+        </header>
+
+        {items.length === 0 ? (
+          <div className="cart-empty">
+            <ShoppingCart size={55} weight="duotone" />
+            <h3>Your order is waiting for its first favourite.</h3>
+            <a href="#menu" className="button button-red" onClick={onClose}>
+              Explore the menu <ArrowDown size={18} />
+            </a>
+          </div>
+        ) : (
+          <>
+            <div className="cart-items">
+              {items.map((item) => {
+                const isDrink =
+                  item.product.isDrink ??
+                  item.product.category !== "cafe-treats";
+                return (
+                  <article className="cart-item" key={item.key}>
+                    <div className={`cart-thumb ${item.product.colour}`}>
+                      {item.product.image ? (
+                        <Image
+                          src={item.product.image}
+                          alt=""
+                          fill
+                          sizes="86px"
+                        />
+                      ) : (
+                        <Cake size={35} weight="duotone" />
+                      )}
+                    </div>
+                    <div className="cart-item-copy">
+                      <span>{item.product.id}</span>
+                      <h3>{item.product.name}</h3>
+                      {isDrink && (
+                        <p>
+                          {item.product.hotAvailable
+                            ? item.temperature
+                            : "Iced"}{" "}
+                          · {item.sweetness}
+                        </p>
+                      )}
+                      {item.notes && <p>“{item.notes}”</p>}
+                    </div>
+                    <div className="cart-item-actions">
+                      <strong>
+                        {item.product.price
+                          ? `£${(item.product.price * item.quantity).toFixed(2)}`
+                          : "Ask us"}
+                      </strong>
+                      <div className="cart-quantity">
+                        <button
+                          aria-label={`Decrease ${item.product.name} quantity`}
+                          disabled={item.quantity === 1}
+                          onClick={() =>
+                            onQuantity(item.key, item.quantity - 1)
+                          }
+                        >
+                          <Minus size={15} />
+                        </button>
+                        <output aria-label={`${item.product.name} quantity`}>
+                          {item.quantity}
+                        </output>
+                        <button
+                          aria-label={`Increase ${item.product.name} quantity`}
+                          disabled={item.quantity === 9}
+                          onClick={() =>
+                            onQuantity(item.key, item.quantity + 1)
+                          }
+                        >
+                          <Plus size={15} />
+                        </button>
+                      </div>
+                      <button
+                        className="cart-remove"
+                        onClick={() => onRemove(item.key)}
+                        aria-label={`Remove ${item.product.name} from order`}
+                      >
+                        <Trash size={17} />
+                      </button>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+            <footer className="cart-foot">
+              <div className="cart-total">
+                <span>
+                  {itemCount} {itemCount === 1 ? "item" : "items"}
+                </span>
+                <strong>£{knownTotal.toFixed(2)}</strong>
+              </div>
+              <p>
+                Guide total. No.9 will confirm availability, options and the
+                final price.
+              </p>
+              <OrderLink
+                className="button button-red cart-whatsapp"
+                message={cartMessage(items)}
+              >
+                Send full order on WhatsApp
+              </OrderLink>
+              <a href="#menu" className="cart-continue" onClick={onClose}>
+                + Add another item
+              </a>
+            </footer>
+          </>
+        )}
+      </div>
     </dialog>
   );
 }
@@ -446,6 +626,8 @@ export function LandingPage({
   const root = useRef<HTMLDivElement>(null);
   const [category, setCategory] = useState<Category>("favourites");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cartOpen, setCartOpen] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [marqueePaused, setMarqueePaused] = useState(false);
   const [openBox, setOpenBox] = useState<number | null>(null);
@@ -455,6 +637,28 @@ export function LandingPage({
     ...menuCategories.map(({ id, label }) => ({ id, label })),
   ];
   const visibleProducts = filterProducts(category, menuProducts);
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+  const addToCart = (line: CartOrderLine) => {
+    const temperature = line.product.hotAvailable ? line.temperature : "Iced";
+    const notes = line.notes.trim();
+    const key = JSON.stringify([
+      line.product.id,
+      temperature,
+      line.sweetness,
+      notes,
+    ]);
+    setCart((current) => {
+      const existing = current.find((item) => item.key === key);
+      if (!existing) return [...current, { ...line, temperature, notes, key }];
+      return current.map((item) =>
+        item.key === key
+          ? { ...item, quantity: Math.min(9, item.quantity + line.quantity) }
+          : item,
+      );
+    });
+    setCartOpen(true);
+  };
 
   useGSAP(
     () => {
@@ -549,9 +753,17 @@ export function LandingPage({
               </a>
               <a href="#connect">Connect</a>
             </nav>
-            <OrderLink className="button button-red nav-order">
-              Let’s order
-            </OrderLink>
+            <button
+              className="button button-red nav-order cart-trigger"
+              onClick={() => setCartOpen(true)}
+              aria-label={`Open order basket with ${cartCount} items`}
+            >
+              <ShoppingCart size={19} weight="fill" />
+              Your order
+              <span className="cart-count" aria-live="polite">
+                {cartCount}
+              </span>
+            </button>
             <button
               className="icon-button mobile-menu-toggle"
               aria-label={mobileMenu ? "Close navigation" : "Open navigation"}
@@ -584,7 +796,16 @@ export function LandingPage({
                   <ArrowUpRight size={20} />
                 </a>
               ))}
-              <OrderLink />
+              <button
+                className="button button-red mobile-cart-trigger"
+                onClick={() => {
+                  setMobileMenu(false);
+                  setCartOpen(true);
+                }}
+              >
+                <ShoppingCart size={20} weight="fill" />
+                Your order <span className="cart-count">{cartCount}</span>
+              </button>
             </nav>
           )}
         </header>
@@ -1151,7 +1372,14 @@ export function LandingPage({
                 pick-me-up?
               </h2>
               <p>Your usual or something new. Let’s make it a good one.</p>
-              <OrderLink className="button button-cream" />
+              <button
+                className="button button-cream"
+                onClick={() => setCartOpen(true)}
+              >
+                <ShoppingCart size={20} weight="fill" />
+                View your order
+                <span className="cart-count dark">{cartCount}</span>
+              </button>
               <span className="cta-note">
                 <Check size={15} /> Pick your favourites. Message us. We’ll take
                 it from there.
@@ -1160,6 +1388,18 @@ export function LandingPage({
             </div>
           </section>
         </main>
+
+        {cartCount > 0 && (
+          <button
+            className="cart-fab"
+            onClick={() => setCartOpen(true)}
+            aria-label={`Open order basket with ${cartCount} items`}
+          >
+            <ShoppingCart size={22} weight="fill" />
+            <span>{cartCount}</span>
+            View order
+          </button>
+        )}
 
         <footer className="site-footer section-width">
           <div className="footer-top">
@@ -1199,6 +1439,22 @@ export function LandingPage({
           key={selectedProduct?.id ?? "closed"}
           product={selectedProduct}
           onClose={() => setSelectedProduct(null)}
+          onAdd={addToCart}
+        />
+        <CartDialog
+          open={cartOpen}
+          items={cart}
+          onClose={() => setCartOpen(false)}
+          onQuantity={(key, quantity) =>
+            setCart((current) =>
+              current.map((item) =>
+                item.key === key ? { ...item, quantity } : item,
+              ),
+            )
+          }
+          onRemove={(key) =>
+            setCart((current) => current.filter((item) => item.key !== key))
+          }
         />
       </div>
     </IconContext.Provider>
