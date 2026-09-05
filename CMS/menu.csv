@@ -2,5 +2,16 @@ id,name,description,price,tag,featured,hot_available,active,colour,sort_order,al
 A01,Brown Sugar Milk Tea,Caramel swirls. Creamy milk tea. Chewy little pearls of joy.,6.50,The classic,true,true,true,peach,10,Ask staff for allergen information
 A02,Taro Milk Tea,"Soft, nutty and wonderfully purple. Your cosy sip, sorted.",6.50,A little dreamy,true,true,true,lilac,20,Ask staff for allergen information
 A03,Mango Milk Tea,Sweet mango meets creamy milk. A tiny tropical escape.,6.50,Sunshine in a cup,true,true,true,butter,30,Ask staff for allergen information
+B01,Classic Bubble Waffle,Placeholder listing for a warm bubble waffle with your choice of toppings.,,Placeholder,false,false,true,butter,10,Placeholder item — confirm ingredients and allergens with No.9
+B02,Ice Cream Waffle,Placeholder listing for a café waffle served with ice cream and sauce.,,Placeholder,false,false,true,pink,20,Placeholder item — confirm ingredients and allergens with No.9
+C01,Vanilla & Oreo Ice Cream,Placeholder listing for a creamy vanilla and biscuit ice cream scoop.,,Placeholder,false,false,true,lilac,10,Placeholder item — confirm ingredients and allergens with No.9
+C02,Strawberry & Chocolate Ice Cream,Placeholder listing for a strawberry and chocolate frozen treat.,,Placeholder,false,false,true,pink,20,Placeholder item — confirm ingredients and allergens with No.9
+D01,Café Latte,Placeholder listing for a smooth espresso and steamed milk latte.,,Placeholder,false,true,true,peach,10,Placeholder item — confirm ingredients and allergens with No.9
+D02,Hot Chocolate,Placeholder listing for a cosy chocolate drink.,,Placeholder,false,true,true,butter,20,Placeholder item — confirm ingredients and allergens with No.9
 E01,Peach & Lychee,"Peachy, fragrant and refreshingly fruity. Pop, sip, repeat.",6.50,Feeling fruity,true,false,true,sage,10,Ask staff for allergen information
 E02,Strawberry Fruit Tea,A berry-bright tea with popping boba. A very good mood.,6.50,Berry good,false,false,true,pink,20,Ask staff for allergen information
+E03,Mango Fruit Tea,Placeholder listing for a bright mango tea served over ice.,,Placeholder,false,false,true,butter,30,Placeholder item — confirm ingredients and allergens with No.9
+E04,Passion Fruit Tea,Placeholder listing for a tangy passion fruit iced tea.,,Placeholder,false,false,true,peach,40,Placeholder item — confirm ingredients and allergens with No.9
+E05,Lychee Fruit Tea,Placeholder listing for a light and fragrant lychee iced tea.,,Placeholder,false,false,true,sage,50,Placeholder item — confirm ingredients and allergens with No.9
+F01,Tiramisu Slice,Placeholder listing for a soft coffee and cocoa café treat.,,Placeholder,false,false,true,peach,10,Placeholder item — confirm ingredients and allergens with No.9
+F02,Chocolate Lava Cake,Placeholder listing for a warm chocolate cake with a molten centre.,,Placeholder,false,false,true,lilac,20,Placeholder item — confirm ingredients and allergens with No.9

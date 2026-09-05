@@ -462,6 +462,7 @@ function CartDialog({
     (total, item) => total + (item.product.price ?? 0) * item.quantity,
     0,
   );
+  const hasUnpricedItems = items.some((item) => item.product.price == null);
 
   useEffect(() => {
     const element = dialog.current;
@@ -593,11 +594,18 @@ function CartDialog({
                 <span>
                   {itemCount} {itemCount === 1 ? "item" : "items"}
                 </span>
-                <strong>£{knownTotal.toFixed(2)}</strong>
+                <strong>
+                  {hasUnpricedItems
+                    ? knownTotal > 0
+                      ? `£${knownTotal.toFixed(2)} + ask us`
+                      : "Price confirmed in chat"
+                    : `£${knownTotal.toFixed(2)}`}
+                </strong>
               </div>
               <p>
-                Guide total. No.9 will confirm availability, options and the
-                final price.
+                {hasUnpricedItems
+                  ? "Some item prices are still placeholders. No.9 will confirm the full total, availability and options in the chat."
+                  : "Guide total. No.9 will confirm availability, options and the final price."}
               </p>
               <OrderLink
                 className="button button-red cart-whatsapp"

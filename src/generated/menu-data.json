@@ -8,11 +8,39 @@
       "sortOrder": 10
     },
     {
+      "code": "B",
+      "id": "waffles",
+      "label": "Waffles",
+      "kind": "food",
+      "sortOrder": 20
+    },
+    {
+      "code": "C",
+      "id": "ice-cream",
+      "label": "Ice cream",
+      "kind": "food",
+      "sortOrder": 30
+    },
+    {
+      "code": "D",
+      "id": "coffee",
+      "label": "Coffee",
+      "kind": "drink",
+      "sortOrder": 40
+    },
+    {
       "code": "E",
       "id": "fruit-tea",
       "label": "Fruit teas",
       "kind": "drink",
       "sortOrder": 50
+    },
+    {
+      "code": "F",
+      "id": "cafe-treats",
+      "label": "Café treats",
+      "kind": "food",
+      "sortOrder": 60
     }
   ],
   "products": [
@@ -62,6 +90,96 @@
       "sortOrder": 30
     },
     {
+      "id": "B01",
+      "name": "Classic Bubble Waffle",
+      "category": "waffles",
+      "description": "Placeholder listing for a warm bubble waffle with your choice of toppings.",
+      "price": null,
+      "image": "/menu-images/B01.png",
+      "colour": "butter",
+      "tag": "Placeholder",
+      "favourite": false,
+      "hotAvailable": false,
+      "isDrink": false,
+      "allergens": "Placeholder item — confirm ingredients and allergens with No.9",
+      "sortOrder": 10
+    },
+    {
+      "id": "B02",
+      "name": "Ice Cream Waffle",
+      "category": "waffles",
+      "description": "Placeholder listing for a café waffle served with ice cream and sauce.",
+      "price": null,
+      "image": "/menu-images/B02.png",
+      "colour": "pink",
+      "tag": "Placeholder",
+      "favourite": false,
+      "hotAvailable": false,
+      "isDrink": false,
+      "allergens": "Placeholder item — confirm ingredients and allergens with No.9",
+      "sortOrder": 20
+    },
+    {
+      "id": "C01",
+      "name": "Vanilla & Oreo Ice Cream",
+      "category": "ice-cream",
+      "description": "Placeholder listing for a creamy vanilla and biscuit ice cream scoop.",
+      "price": null,
+      "image": "/menu-images/C01.png",
+      "colour": "lilac",
+      "tag": "Placeholder",
+      "favourite": false,
+      "hotAvailable": false,
+      "isDrink": false,
+      "allergens": "Placeholder item — confirm ingredients and allergens with No.9",
+      "sortOrder": 10
+    },
+    {
+      "id": "C02",
+      "name": "Strawberry & Chocolate Ice Cream",
+      "category": "ice-cream",
+      "description": "Placeholder listing for a strawberry and chocolate frozen treat.",
+      "price": null,
+      "image": "/menu-images/C02.png",
+      "colour": "pink",
+      "tag": "Placeholder",
+      "favourite": false,
+      "hotAvailable": false,
+      "isDrink": false,
+      "allergens": "Placeholder item — confirm ingredients and allergens with No.9",
+      "sortOrder": 20
+    },
+    {
+      "id": "D01",
+      "name": "Café Latte",
+      "category": "coffee",
+      "description": "Placeholder listing for a smooth espresso and steamed milk latte.",
+      "price": null,
+      "image": "/menu-images/D01.png",
+      "colour": "peach",
+      "tag": "Placeholder",
+      "favourite": false,
+      "hotAvailable": true,
+      "isDrink": true,
+      "allergens": "Placeholder item — confirm ingredients and allergens with No.9",
+      "sortOrder": 10
+    },
+    {
+      "id": "D02",
+      "name": "Hot Chocolate",
+      "category": "coffee",
+      "description": "Placeholder listing for a cosy chocolate drink.",
+      "price": null,
+      "image": "/menu-images/D02.png",
+      "colour": "butter",
+      "tag": "Placeholder",
+      "favourite": false,
+      "hotAvailable": true,
+      "isDrink": true,
+      "allergens": "Placeholder item — confirm ingredients and allergens with No.9",
+      "sortOrder": 20
+    },
+    {
       "id": "E01",
       "name": "Peach & Lychee",
       "category": "fruit-tea",
@@ -89,6 +207,81 @@
       "hotAvailable": false,
       "isDrink": true,
       "allergens": "Ask staff for allergen information",
+      "sortOrder": 20
+    },
+    {
+      "id": "E03",
+      "name": "Mango Fruit Tea",
+      "category": "fruit-tea",
+      "description": "Placeholder listing for a bright mango tea served over ice.",
+      "price": null,
+      "image": "/menu-images/E03.png",
+      "colour": "butter",
+      "tag": "Placeholder",
+      "favourite": false,
+      "hotAvailable": false,
+      "isDrink": true,
+      "allergens": "Placeholder item — confirm ingredients and allergens with No.9",
+      "sortOrder": 30
+    },
+    {
+      "id": "E04",
+      "name": "Passion Fruit Tea",
+      "category": "fruit-tea",
+      "description": "Placeholder listing for a tangy passion fruit iced tea.",
+      "price": null,
+      "image": "/menu-images/E04.png",
+      "colour": "peach",
+      "tag": "Placeholder",
+      "favourite": false,
+      "hotAvailable": false,
+      "isDrink": true,
+      "allergens": "Placeholder item — confirm ingredients and allergens with No.9",
+      "sortOrder": 40
+    },
+    {
+      "id": "E05",
+      "name": "Lychee Fruit Tea",
+      "category": "fruit-tea",
+      "description": "Placeholder listing for a light and fragrant lychee iced tea.",
+      "price": null,
+      "image": "/menu-images/E05.png",
+      "colour": "sage",
+      "tag": "Placeholder",
+      "favourite": false,
+      "hotAvailable": false,
+      "isDrink": true,
+      "allergens": "Placeholder item — confirm ingredients and allergens with No.9",
+      "sortOrder": 50
+    },
+    {
+      "id": "F01",
+      "name": "Tiramisu Slice",
+      "category": "cafe-treats",
+      "description": "Placeholder listing for a soft coffee and cocoa café treat.",
+      "price": null,
+      "image": "/menu-images/F01.png",
+      "colour": "peach",
+      "tag": "Placeholder",
+      "favourite": false,
+      "hotAvailable": false,
+      "isDrink": false,
+      "allergens": "Placeholder item — confirm ingredients and allergens with No.9",
+      "sortOrder": 10
+    },
+    {
+      "id": "F02",
+      "name": "Chocolate Lava Cake",
+      "category": "cafe-treats",
+      "description": "Placeholder listing for a warm chocolate cake with a molten centre.",
+      "price": null,
+      "image": "/menu-images/F02.png",
+      "colour": "lilac",
+      "tag": "Placeholder",
+      "favourite": false,
+      "hotAvailable": false,
+      "isDrink": false,
+      "allergens": "Placeholder item — confirm ingredients and allergens with No.9",
       "sortOrder": 20
     }
   ]
