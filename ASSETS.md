@@ -16,21 +16,26 @@ The starter files in `CMS/images/` are size-optimised PNG conversions of the mat
 
 ## Temporary CMS photography
 
-The files below are clearly labelled placeholder menu items and must be replaced with No.9 photography before publication. They were downloaded from Wikimedia Commons on 5 September 2026, centre-cropped to square and converted to PNG. Creator and licence details remain available on each linked source page.
+Menu card images remain replaceable placeholders. The Wikimedia Commons originals were centre-cropped to square PNGs on 5 September 2026; creator and licence details are linked below.
 
-| CMS files | Placeholder subject                | Source and licence                                                                                                            |
-| --------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `B01.png` | Bubble waffle                      | [Andy Li, CC0](https://commons.wikimedia.org/wiki/File:Bubble_waffle_at_Brighton_Christmas_market_2022.jpg)                   |
-| `B02.png` | Waffle dessert                     | [Ruth Hartnup, CC BY 2.0](<https://commons.wikimedia.org/wiki/File:Waffle_for_dessert_at_Shishinori_(16296508266).jpg>)       |
-| `C01.png` | Vanilla and Oreo ice cream         | [Geoffreyrabbit, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:A_bowl_of_Ice_cream.jpg)                               |
-| `C02.png` | Strawberry and chocolate ice cream | [Dove ice cream photograph, CC BY 2.0](<https://commons.wikimedia.org/wiki/File:Dove_strawberry_chocolate_ice_cream_(2).jpg>) |
-| `D01.png` | Café latte                         | [Divyaacharya16, CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:Coffee_Latte.JPG)                                      |
-| `D02.png` | Hot chocolate                      | [Steve Buissinne, CC0](https://commons.wikimedia.org/wiki/File:Hot-chocolate-1058197.jpg)                                     |
-| `E03.png` | Mixed fruit iced tea               | [Biswarup Ganguly, CC BY 3.0](https://commons.wikimedia.org/wiki/File:Mixed_Fruit_Iced_Tea_-_Kolkata_2015-04-12_7874.JPG)     |
-| `E04.png` | Lemon iced tea                     | [National Cancer Institute, public domain](https://commons.wikimedia.org/wiki/File:NCI_iced_tea.jpg)                          |
-| `E05.png` | Iced tea                           | [Kanko, CC BY 2.0](https://commons.wikimedia.org/wiki/File:Ice_tea_glass.jpg)                                                 |
-| `F01.png` | Tiramisu slice                     | [Fitrah 9131, CC BY 3.0](https://commons.wikimedia.org/wiki/File:A_slice_of_tiramisu_cake.jpg)                                |
-| `F02.png` | Chocolate lava cake                | [sanctumsolitude, CC BY 2.0](https://commons.wikimedia.org/wiki/File:Chocolate_lava_cake.jpg)                                 |
+| CMS files                                            | Placeholder subject  | Source and licence                                                                                                        |
+| ---------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `B01.png`, `B05.png`–`B07.png`                       | Bubble waffle        | [Andy Li, CC0](https://commons.wikimedia.org/wiki/File:Bubble_waffle_at_Brighton_Christmas_market_2022.jpg)               |
+| `B02.png`–`B04.png`                                  | Waffle dessert       | [Ruth Hartnup, CC BY 2.0](<https://commons.wikimedia.org/wiki/File:Waffle_for_dessert_at_Shishinori_(16296508266).jpg>)   |
+| `C01.png`                                            | Ice cream            | [Geoffreyrabbit, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:A_bowl_of_Ice_cream.jpg)                           |
+| `D01.png`–`D04.png`, `H01.png`, `H03.png`            | Café latte           | [Divyaacharya16, CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:Coffee_Latte.JPG)                                  |
+| `D05.png`, `D06.png`, `H06.png`                      | Hot chocolate        | [Steve Buissinne, CC0](https://commons.wikimedia.org/wiki/File:Hot-chocolate-1058197.jpg)                                 |
+| `E03.png`, `E07.png`–`E09.png`, `G02.png`, `G04.png` | Mixed fruit iced tea | [Biswarup Ganguly, CC BY 3.0](https://commons.wikimedia.org/wiki/File:Mixed_Fruit_Iced_Tea_-_Kolkata_2015-04-12_7874.JPG) |
+| `E04.png`, `E10.png`, `G05.png`                      | Lemon iced tea       | [National Cancer Institute, public domain](https://commons.wikimedia.org/wiki/File:NCI_iced_tea.jpg)                      |
+| `E05.png`, `E11.png`                                 | Iced tea             | [Kanko, CC BY 2.0](https://commons.wikimedia.org/wiki/File:Ice_tea_glass.jpg)                                             |
+| `F01.png`                                            | Tiramisu slice       | [Fitrah 9131, CC BY 3.0](https://commons.wikimedia.org/wiki/File:A_slice_of_tiramisu_cake.jpg)                            |
+| `F02.png`                                            | Chocolate lava cake  | [sanctumsolitude, CC BY 2.0](https://commons.wikimedia.org/wiki/File:Chocolate_lava_cake.jpg)                             |
+
+Additional placeholder files reuse the documented No.9 photographs: `A04.png`–`A07.png` and `A09.png` reuse `A01`; `A11.png`, `A12.png`, `H02.png` and `H04.png` reuse `A02`; `A10.png`, `G01.png` and `H05.png` reuse `A03`; `A08.png`, `E06.png`, `G03.png` and `H07.png` reuse `E02`.
+
+## Owner-supplied menu references
+
+`CMS/reference/menu-board-drinks.png`, `menu-board-full.png` and `menu-board-waffles.png` are unchanged copies of the menu boards supplied by the owner on 5 September 2026. They are the source for the CMS item names, medium/large prices, hot/iced prices, topping notes and waffle descriptions.
 
 ## Owner-supplied logo
 

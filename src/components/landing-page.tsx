@@ -39,6 +39,7 @@ import {
   type Product,
   cartMessage,
   filterProducts,
+  itemPrice,
   shop,
   whatsappUrl,
 } from "@/lib/shop";
@@ -121,6 +122,29 @@ const deliveryLinks = [
 ];
 
 type CartItem = CartOrderLine & { key: string };
+
+function priceLabel(product: Product) {
+  if (product.price == null) return "Ask us";
+  if (product.largePrice != null) {
+    return (
+      "£" +
+      product.price.toFixed(2) +
+      " M · £" +
+      product.largePrice.toFixed(2) +
+      " L"
+    );
+  }
+  if (product.icedPrice != null) {
+    return (
+      "£" +
+      product.price.toFixed(2) +
+      " hot · £" +
+      product.icedPrice.toFixed(2) +
+      " iced"
+    );
+  }
+  return "£" + product.price.toFixed(2);
+}
 
 function Brand({ footer = false }: { footer?: boolean }) {
   return (
@@ -269,9 +293,7 @@ function ProductCard({
       </button>
       <div className="product-info">
         <h3>{product.name}</h3>
-        <span className="product-price">
-          {product.price ? `£${product.price.toFixed(2)}` : "Ask us"}
-        </span>
+        <span className="product-price">{priceLabel(product)}</span>
       </div>
       <p>{product.description}</p>
     </article>
@@ -289,12 +311,24 @@ function OrderDialog({
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [quantity, setQuantity] = useState(1);
-  const [temperature, setTemperature] = useState<"Iced" | "Hot">("Iced");
+  const [size, setSize] = useState<"Medium" | "Large" | null>(
+    product?.largePrice != null ? "Medium" : null,
+  );
+  const [temperature, setTemperature] = useState<"Iced" | "Hot">(
+    product?.icedPrice != null ? "Hot" : "Iced",
+  );
   const [sweetness, setSweetness] = useState("Regular");
   const [notes, setNotes] = useState("");
   const isDrink = product
     ? (product.isDrink ?? product.category !== "cafe-treats")
     : false;
+  const supportsSweetness = product
+    ? ["bubble-tea", "fruit-tea", "slushies"].includes(product.category)
+    : false;
+  const hasOrderOptions = Boolean(
+    product &&
+    (product.largePrice != null || product.hotAvailable || supportsSweetness),
+  );
 
   useEffect(() => {
     if (product) {
@@ -376,34 +410,61 @@ function OrderDialog({
                 </button>
               </div>
             </div>
-            {isDrink && (
+            {isDrink && hasOrderOptions && (
               <div className="order-options">
-                <label htmlFor="order-temperature">
-                  Temperature
-                  <select
-                    id="order-temperature"
-                    value={temperature}
-                    onChange={(event) =>
-                      setTemperature(event.target.value as "Iced" | "Hot")
-                    }
-                  >
-                    <option>Iced</option>
-                    {product.hotAvailable && <option>Hot</option>}
-                  </select>
-                </label>
-                <label htmlFor="order-sweetness">
-                  Sweetness preference
-                  <select
-                    id="order-sweetness"
-                    value={sweetness}
-                    onChange={(event) => setSweetness(event.target.value)}
-                  >
-                    <option>Regular</option>
-                    <option>Less sweet</option>
-                    <option>No added sugar, if possible</option>
-                  </select>
-                </label>
+                {product.largePrice != null && (
+                  <label htmlFor="order-size">
+                    Size
+                    <select
+                      id="order-size"
+                      value={size ?? "Medium"}
+                      onChange={(event) =>
+                        setSize(event.target.value as "Medium" | "Large")
+                      }
+                    >
+                      <option>Medium</option>
+                      <option>Large</option>
+                    </select>
+                  </label>
+                )}
+                {product.hotAvailable && (
+                  <label htmlFor="order-temperature">
+                    Temperature
+                    <select
+                      id="order-temperature"
+                      value={temperature}
+                      onChange={(event) =>
+                        setTemperature(event.target.value as "Iced" | "Hot")
+                      }
+                    >
+                      <option>Iced</option>
+                      <option>Hot</option>
+                    </select>
+                  </label>
+                )}
+                {supportsSweetness && (
+                  <label htmlFor="order-sweetness">
+                    Sweetness
+                    <select
+                      id="order-sweetness"
+                      value={sweetness}
+                      onChange={(event) => setSweetness(event.target.value)}
+                    >
+                      <option>Regular</option>
+                      <option>Less sweet</option>
+                      <option>No added sugar, if possible</option>
+                    </select>
+                  </label>
+                )}
               </div>
+            )}
+            {product.price != null && (
+              <p className="dialog-selection-price">
+                Current selection: £
+                {(
+                  itemPrice(product, size, temperature) ?? product.price
+                ).toFixed(2)}
+              </p>
             )}
             <label className="notes-label" htmlFor="order-notes">
               Anything else?
@@ -425,7 +486,14 @@ function OrderDialog({
             <button
               className="button button-red dialog-add-button"
               onClick={() => {
-                onAdd({ product, quantity, temperature, sweetness, notes });
+                onAdd({
+                  product,
+                  quantity,
+                  size,
+                  temperature,
+                  sweetness,
+                  notes,
+                });
                 close();
               }}
             >
@@ -459,10 +527,15 @@ function CartDialog({
   const dialog = useRef<HTMLDialogElement>(null);
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   const knownTotal = items.reduce(
-    (total, item) => total + (item.product.price ?? 0) * item.quantity,
+    (total, item) =>
+      total +
+      (itemPrice(item.product, item.size, item.temperature) ?? 0) *
+        item.quantity,
     0,
   );
-  const hasUnpricedItems = items.some((item) => item.product.price == null);
+  const hasUnpricedItems = items.some(
+    (item) => itemPrice(item.product, item.size, item.temperature) == null,
+  );
 
   useEffect(() => {
     const element = dialog.current;
@@ -538,20 +611,43 @@ function CartDialog({
                     <div className="cart-item-copy">
                       <span>{item.product.id}</span>
                       <h3>{item.product.name}</h3>
-                      {isDrink && (
+                      {(item.size ||
+                        (isDrink && item.product.hotAvailable) ||
+                        (isDrink &&
+                          ["bubble-tea", "fruit-tea", "slushies"].includes(
+                            item.product.category,
+                          ))) && (
                         <p>
-                          {item.product.hotAvailable
-                            ? item.temperature
-                            : "Iced"}{" "}
-                          · {item.sweetness}
+                          {[
+                            item.size,
+                            isDrink && item.product.hotAvailable
+                              ? item.temperature
+                              : null,
+                            isDrink &&
+                            ["bubble-tea", "fruit-tea", "slushies"].includes(
+                              item.product.category,
+                            )
+                              ? item.sweetness
+                              : null,
+                          ]
+                            .filter(Boolean)
+                            .join(" · ")}
                         </p>
                       )}
                       {item.notes && <p>“{item.notes}”</p>}
                     </div>
                     <div className="cart-item-actions">
                       <strong>
-                        {item.product.price
-                          ? `£${(item.product.price * item.quantity).toFixed(2)}`
+                        {itemPrice(item.product, item.size, item.temperature) !=
+                        null
+                          ? "£" +
+                            (
+                              (itemPrice(
+                                item.product,
+                                item.size,
+                                item.temperature,
+                              ) ?? 0) * item.quantity
+                            ).toFixed(2)
                           : "Ask us"}
                       </strong>
                       <div className="cart-quantity">
@@ -652,6 +748,7 @@ export function LandingPage({
     const notes = line.notes.trim();
     const key = JSON.stringify([
       line.product.id,
+      line.size,
       temperature,
       line.sweetness,
       notes,
@@ -967,21 +1064,9 @@ export function LandingPage({
             </span>
             <div className="menu-foot">
               <p>
-                {category === "cafe-treats" ? (
-                  "Ask us for today’s dessert selection, photos and prices."
-                ) : (
-                  <>
-                    Prices shown are a{" "}
-                    <a
-                      href={shop.menuSource}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      delivery-menu guide
-                    </a>
-                    . Confirm today’s prices and availability with us.
-                  </>
-                )}
+                {category === "cafe-treats"
+                  ? "Ask us for today’s dessert selection, photos and prices."
+                  : "Prices are transcribed from No.9’s supplied menu boards. Confirm today’s prices and availability with us."}
               </p>
               <OrderLink className="text-link">
                 Can’t decide? Let’s chat

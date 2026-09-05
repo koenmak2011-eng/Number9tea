@@ -638,7 +638,7 @@ h2 {
   font-size: 14px;
   color: var(--red);
   font-weight: 600;
-  white-space: nowrap;
+  text-align: right;
 }
 .product-card > p {
   font-size: 12px;
@@ -1515,8 +1515,13 @@ h2 {
 }
 .order-options {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   gap: 12px;
+}
+.dialog-copy > .dialog-selection-price {
+  margin-top: 12px;
+  color: var(--red) !important;
+  font-weight: 800;
 }
 .order-options label,
 .notes-label {

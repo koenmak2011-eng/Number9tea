@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   cartMessage,
   filterProducts,
+  itemPrice,
   orderMessage,
   products,
   whatsappUrl,
@@ -61,6 +62,7 @@ test("cart message combines configured items into one WhatsApp order", () => {
     {
       product: products[0],
       quantity: 2,
+      size: null,
       temperature: "Hot",
       sweetness: "Less sweet",
       notes: "One with less ice",
@@ -68,6 +70,7 @@ test("cart message combines configured items into one WhatsApp order", () => {
     {
       product: products[4],
       quantity: 1,
+      size: null,
       temperature: "Iced",
       sweetness: "Regular",
       notes: "",
@@ -78,4 +81,29 @@ test("cart message combines configured items into one WhatsApp order", () => {
   assert.match(message, /2\. 1 x Strawberry Fruit Tea/);
   assert.match(message, /Temperature: Hot/);
   assert.match(message, /Menu price estimate: £19\.50/);
+});
+
+test("menu variants use the selected size and temperature prices", () => {
+  const sizedDrink = { ...products[0], price: 5.8, largePrice: 6.8 };
+  const hotDrink = { ...sizedDrink, hotSurcharge: 0.2 };
+  const coffee = { ...products[0], price: 4.8, icedPrice: 5.8 };
+
+  assert.equal(itemPrice(sizedDrink, "Medium", "Iced"), 5.8);
+  assert.equal(itemPrice(sizedDrink, "Large", "Iced"), 6.8);
+  assert.equal(itemPrice(hotDrink, "Large", "Hot"), 7);
+  assert.equal(itemPrice(coffee, null, "Hot"), 4.8);
+  assert.equal(itemPrice(coffee, null, "Iced"), 5.8);
+
+  const message = cartMessage([
+    {
+      product: sizedDrink,
+      quantity: 2,
+      size: "Large",
+      temperature: "Iced",
+      sweetness: "Regular",
+      notes: "",
+    },
+  ]);
+  assert.match(message, /Size: Large/);
+  assert.match(message, /Menu price estimate: £13\.60/);
 });

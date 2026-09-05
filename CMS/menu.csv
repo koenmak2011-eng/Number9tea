@@ -1,17 +1,52 @@
-id,name,description,price,tag,featured,hot_available,active,colour,sort_order,allergens
-A01,Brown Sugar Milk Tea,Caramel swirls. Creamy milk tea. Chewy little pearls of joy.,6.50,The classic,true,true,true,peach,10,Ask staff for allergen information
-A02,Taro Milk Tea,"Soft, nutty and wonderfully purple. Your cosy sip, sorted.",6.50,A little dreamy,true,true,true,lilac,20,Ask staff for allergen information
-A03,Mango Milk Tea,Sweet mango meets creamy milk. A tiny tropical escape.,6.50,Sunshine in a cup,true,true,true,butter,30,Ask staff for allergen information
-B01,Classic Bubble Waffle,Placeholder listing for a warm bubble waffle with your choice of toppings.,,Placeholder,false,false,true,butter,10,Placeholder item — confirm ingredients and allergens with No.9
-B02,Ice Cream Waffle,Placeholder listing for a café waffle served with ice cream and sauce.,,Placeholder,false,false,true,pink,20,Placeholder item — confirm ingredients and allergens with No.9
-C01,Vanilla & Oreo Ice Cream,Placeholder listing for a creamy vanilla and biscuit ice cream scoop.,,Placeholder,false,false,true,lilac,10,Placeholder item — confirm ingredients and allergens with No.9
-C02,Strawberry & Chocolate Ice Cream,Placeholder listing for a strawberry and chocolate frozen treat.,,Placeholder,false,false,true,pink,20,Placeholder item — confirm ingredients and allergens with No.9
-D01,Café Latte,Placeholder listing for a smooth espresso and steamed milk latte.,,Placeholder,false,true,true,peach,10,Placeholder item — confirm ingredients and allergens with No.9
-D02,Hot Chocolate,Placeholder listing for a cosy chocolate drink.,,Placeholder,false,true,true,butter,20,Placeholder item — confirm ingredients and allergens with No.9
-E01,Peach & Lychee,"Peachy, fragrant and refreshingly fruity. Pop, sip, repeat.",6.50,Feeling fruity,true,false,true,sage,10,Ask staff for allergen information
-E02,Strawberry Fruit Tea,A berry-bright tea with popping boba. A very good mood.,6.50,Berry good,false,false,true,pink,20,Ask staff for allergen information
-E03,Mango Fruit Tea,Placeholder listing for a bright mango tea served over ice.,,Placeholder,false,false,true,butter,30,Placeholder item — confirm ingredients and allergens with No.9
-E04,Passion Fruit Tea,Placeholder listing for a tangy passion fruit iced tea.,,Placeholder,false,false,true,peach,40,Placeholder item — confirm ingredients and allergens with No.9
-E05,Lychee Fruit Tea,Placeholder listing for a light and fragrant lychee iced tea.,,Placeholder,false,false,true,sage,50,Placeholder item — confirm ingredients and allergens with No.9
-F01,Tiramisu Slice,Placeholder listing for a soft coffee and cocoa café treat.,,Placeholder,false,false,true,peach,10,Placeholder item — confirm ingredients and allergens with No.9
-F02,Chocolate Lava Cake,Placeholder listing for a warm chocolate cake with a molten centre.,,Placeholder,false,false,true,lilac,20,Placeholder item — confirm ingredients and allergens with No.9
+id,name,description,price,large_price,iced_price,tag,featured,hot_available,active,colour,sort_order,allergens
+A01,Brown Sugar Bubble Milk Tea,"Medium or large. Includes tapioca boba; extra topping +90p. Hot +20p; oat milk +50p.",5.80,6.80,,Brown sugar,true,true,true,peach,10,Please ask staff about ingredients and allergens before ordering
+A02,Taro Milk Bubble Tea,"Medium or large. Includes one boba topping; extra topping +90p. Hot +20p; oat milk +50p.",5.80,6.80,,Milk tea,true,true,true,lilac,20,Please ask staff about ingredients and allergens before ordering
+A03,Mango Milk Bubble Tea,"Medium or large. Includes one boba topping; extra topping +90p. Hot +20p; oat milk +50p.",5.80,6.80,,Milk tea,true,true,true,butter,30,Please ask staff about ingredients and allergens before ordering
+A04,Brown Sugar Bubble Milk,"Medium or large. Includes tapioca boba; extra topping +90p. Hot +20p; oat milk +50p.",5.80,6.80,,Brown sugar,false,true,true,peach,40,Please ask staff about ingredients and allergens before ordering
+A05,Brown Sugar Bubble Milk Green Tea,"Medium or large. Includes tapioca boba; extra topping +90p. Hot +20p; oat milk +50p.",5.80,6.80,,Brown sugar,false,true,true,sage,50,Please ask staff about ingredients and allergens before ordering
+A06,Brown Sugar Latte,"Brown sugar, coffee and milk. Medium or large; includes tapioca boba. Hot +20p; oat milk +50p.",5.80,6.80,,Brown sugar,false,true,true,peach,60,Please ask staff about ingredients and allergens before ordering
+A07,Brown Sugar Dalgona Coffee,"Medium or large. Includes tapioca boba; extra topping +90p. Hot +20p; oat milk +50p.",5.80,6.80,,Brown sugar,false,true,true,butter,70,Please ask staff about ingredients and allergens before ordering
+A08,Strawberry Milk Bubble Tea,"Medium or large. Includes one boba topping; extra topping +90p. Hot +20p; oat milk +50p.",5.80,6.80,,Milk tea,false,true,true,pink,80,Please ask staff about ingredients and allergens before ordering
+A09,Chocolate Milk Bubble Tea,"Medium or large. Includes one boba topping; extra topping +90p. Hot +20p; oat milk +50p.",5.80,6.80,,Milk tea,false,true,true,peach,90,Please ask staff about ingredients and allergens before ordering
+A10,Honeydew Melon Milk Bubble Tea,"Medium or large. Includes one boba topping; extra topping +90p. Hot +20p; oat milk +50p.",5.80,6.80,,Milk tea,false,true,true,sage,100,Please ask staff about ingredients and allergens before ordering
+A11,Matcha Milk Bubble Tea,"Medium or large. Includes one boba topping; extra topping +90p. Hot +20p; oat milk +50p.",5.80,6.80,,Milk tea,false,true,true,sage,110,Please ask staff about ingredients and allergens before ordering
+A12,Coconut Milk Bubble Tea,"Medium or large. Includes one boba topping; extra topping +90p. Hot +20p; oat milk +50p.",5.80,6.80,,Milk tea,false,true,true,lilac,120,Please ask staff about ingredients and allergens before ordering
+E01,Peach & Lychee Fruit Tea,"Medium or large. Includes one boba topping; extra topping +90p.",5.80,6.80,,Iced fruit tea,true,false,true,sage,10,Please ask staff about ingredients and allergens before ordering
+E02,Strawberry Fruit Tea,"Medium or large. Includes one boba topping; extra topping +90p.",5.80,6.80,,Iced fruit tea,false,false,true,pink,20,Please ask staff about ingredients and allergens before ordering
+E03,Lychee Fruit Tea,"Medium or large. Includes one boba topping; extra topping +90p.",5.80,6.80,,Iced fruit tea,false,false,true,lilac,30,Please ask staff about ingredients and allergens before ordering
+E04,Grape Fruit Tea,"Medium or large. Includes one boba topping; extra topping +90p.",5.80,6.80,,Iced fruit tea,false,false,true,lilac,40,Please ask staff about ingredients and allergens before ordering
+E05,Rose Fruit Tea,"Medium or large. Includes one boba topping; extra topping +90p.",5.80,6.80,,Iced fruit tea,false,false,true,pink,50,Please ask staff about ingredients and allergens before ordering
+E06,Watermelon Fruit Tea,"Medium or large. Includes one boba topping; extra topping +90p.",5.80,6.80,,Iced fruit tea,false,false,true,pink,60,Please ask staff about ingredients and allergens before ordering
+E07,Honeydew Melon Fruit Tea,"Medium or large. Includes one boba topping; extra topping +90p.",5.80,6.80,,Iced fruit tea,false,false,true,sage,70,Please ask staff about ingredients and allergens before ordering
+E08,Green Apple Fruit Tea,"Medium or large. Includes one boba topping; extra topping +90p.",5.80,6.80,,Iced fruit tea,false,false,true,sage,80,Please ask staff about ingredients and allergens before ordering
+E09,Mango & Passion Fruit Tea,"Medium or large. Includes one boba topping; extra topping +90p.",5.80,6.80,,Iced fruit tea,false,false,true,butter,90,Please ask staff about ingredients and allergens before ordering
+E10,Lemon & Lime Fruit Tea,"Medium or large. Includes one boba topping; extra topping +90p.",5.80,6.80,,Iced fruit tea,false,false,true,butter,100,Please ask staff about ingredients and allergens before ordering
+E11,Honey & Jasmine Fruit Tea,"Medium or large. Includes one boba topping; extra topping +90p.",5.80,6.80,,Iced fruit tea,false,false,true,peach,110,Please ask staff about ingredients and allergens before ordering
+G01,Mango Slushie,Available medium or large.,5.40,6.40,,Slushie,false,false,true,butter,10,Please ask staff about ingredients and allergens before ordering
+G02,Passion Fruit Slushie,Available medium or large.,5.40,6.40,,Slushie,false,false,true,peach,20,Please ask staff about ingredients and allergens before ordering
+G03,Strawberry Slushie,Available medium or large.,5.40,6.40,,Slushie,false,false,true,pink,30,Please ask staff about ingredients and allergens before ordering
+G04,Watermelon Slushie,Available medium or large.,5.40,6.40,,Slushie,false,false,true,sage,40,Please ask staff about ingredients and allergens before ordering
+G05,Lemon & Mint Slushie,Available medium or large.,5.40,6.40,,Slushie,false,false,true,sage,50,Please ask staff about ingredients and allergens before ordering
+H01,Ferrero Milkshake,Available medium or large.,6.60,7.60,,Milkshake,false,false,true,peach,10,Please ask staff about ingredients and allergens before ordering
+H02,Oreo Milkshake,Available medium or large.,6.20,7.20,,Milkshake,false,false,true,lilac,20,Please ask staff about ingredients and allergens before ordering
+H03,Lotus Biscoff Milkshake,Available medium or large.,6.20,7.20,,Milkshake,false,false,true,butter,30,Please ask staff about ingredients and allergens before ordering
+H04,Taro Milkshake,Available medium or large.,6.20,7.20,,Milkshake,false,false,true,lilac,40,Please ask staff about ingredients and allergens before ordering
+H05,Mango Milkshake,Available medium or large.,5.80,6.80,,Milkshake,false,false,true,butter,50,Please ask staff about ingredients and allergens before ordering
+H06,Chocolate Milkshake,Available medium or large.,5.80,6.80,,Milkshake,false,false,true,peach,60,Please ask staff about ingredients and allergens before ordering
+H07,Strawberry Milkshake,Available medium or large.,5.80,6.80,,Milkshake,false,false,true,pink,70,Please ask staff about ingredients and allergens before ordering
+B01,Strawberry Bubble Waffle,"Fresh strawberries, strawberry sauce, sprinkles and fresh cream. Add ice cream for £1.50.",7.50,,,Bubble waffle,true,false,true,pink,10,Please ask staff about ingredients and allergens before ordering
+B02,Banana Nutella Bubble Waffle,"Fresh banana, Nutella, chocolate sauce and fresh cream. Add ice cream for £1.50.",7.50,,,Bubble waffle,false,false,true,butter,20,Please ask staff about ingredients and allergens before ordering
+B03,Lotus Biscoff Bubble Waffle,"Lotus Biscoff crumble, biscuit, sauce and fresh cream. Add ice cream for £1.50.",7.50,,,Bubble waffle,false,false,true,butter,30,Please ask staff about ingredients and allergens before ordering
+B04,Oreo Bubble Waffle,"Oreo crumble, biscuit, chocolate sauce, chocolate wafer roll and fresh cream. Add ice cream for £1.50.",7.50,,,Bubble waffle,false,false,true,lilac,40,Please ask staff about ingredients and allergens before ordering
+B05,Marshmallow Bubble Waffle,"Mini marshmallows, sprinkles, strawberry sauce and fresh cream. Add ice cream for £1.50.",7.50,,,Bubble waffle,false,false,true,pink,50,Please ask staff about ingredients and allergens before ordering
+B06,Kinder Bueno Bubble Waffle,"Kinder Bueno, sprinkles, chocolate sauce and fresh cream. Add ice cream for £1.50.",7.50,,,Bubble waffle,false,false,true,peach,60,Please ask staff about ingredients and allergens before ordering
+B07,Brown Sugar Boba Bubble Waffle,"Tapioca pearls, brown sugar sauce, chocolate wafer roll and fresh cream. Add ice cream for £1.50.",7.50,,,Bubble waffle,false,false,true,peach,70,Please ask staff about ingredients and allergens before ordering
+C01,Soft Serve Ice Cream,"Cup or cone with one sauce: chocolate, strawberry or Lotus Biscoff.",3.80,,,Soft serve,false,false,true,lilac,10,Please ask staff about ingredients and allergens before ordering
+D01,No.9 Coffee,Hot or iced. Oat milk +50p.,4.80,,5.80,Hot or iced,false,true,true,peach,10,Please ask staff about ingredients and allergens before ordering
+D02,Coffee Latte,Hot or iced. Oat milk +50p.,4.80,,5.80,Hot or iced,false,true,true,peach,20,Please ask staff about ingredients and allergens before ordering
+D03,Caramel Coffee,Hot or iced. Oat milk +50p.,4.80,,5.80,Hot or iced,false,true,true,butter,30,Please ask staff about ingredients and allergens before ordering
+D04,Vanilla Coffee,Hot or iced. Oat milk +50p.,4.80,,5.80,Hot or iced,false,true,true,lilac,40,Please ask staff about ingredients and allergens before ordering
+D05,Mocha,Hot or iced. Oat milk +50p.,4.80,,5.80,Hot or iced,false,true,true,peach,50,Please ask staff about ingredients and allergens before ordering
+D06,Hot Chocolate,Hot or iced. Oat milk +50p.,4.80,,5.80,Hot or iced,false,true,true,pink,60,Please ask staff about ingredients and allergens before ordering
+F01,Tiramisu Slice,Ask us for today’s availability and price.,,,,Café treat,false,false,true,peach,10,Please ask staff about ingredients and allergens before ordering
+F02,Chocolate Lava Cake,Ask us for today’s availability and price.,,,,Café treat,false,false,true,lilac,20,Please ask staff about ingredients and allergens before ordering

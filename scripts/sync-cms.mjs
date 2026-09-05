@@ -47,9 +47,13 @@ function parseCsv(text) {
   if (!headers) return [];
   return values.map((cells, rowIndex) => {
     if (cells.length !== headers.length) {
-      throw new Error(`CSV row ${rowIndex + 2} has ${cells.length} fields; expected ${headers.length}.`);
+      throw new Error(
+        `CSV row ${rowIndex + 2} has ${cells.length} fields; expected ${headers.length}.`,
+      );
     }
-    return Object.fromEntries(headers.map((header, index) => [header, cells[index]]));
+    return Object.fromEntries(
+      headers.map((header, index) => [header, cells[index]]),
+    );
   });
 }
 
@@ -79,33 +83,57 @@ function wholeNumber(value, field, context) {
   return parsed;
 }
 
+function optionalPrice(row, field, context) {
+  const rawPrice = row[field]?.trim() ?? "";
+  const price = rawPrice === "" ? null : Number(rawPrice);
+  if (price !== null && (!Number.isFinite(price) || price < 0)) {
+    throw new Error(
+      `${context}: ${field} must be a non-negative number or blank.`,
+    );
+  }
+  return price;
+}
+
 const categoryRows = readCsv("categories.csv");
 const categoryCodes = new Set();
 const categorySlugs = new Set();
-const categories = categoryRows.map((row, index) => {
-  const context = `categories.csv row ${index + 2}`;
-  const code = required(row, "code", context);
-  const id = required(row, "slug", context);
-  if (!/^[A-Z]$/.test(code)) throw new Error(`${context}: code must be one uppercase letter.`);
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) throw new Error(`${context}: slug must use lowercase kebab-case.`);
-  if (categoryCodes.has(code)) throw new Error(`${context}: duplicate code ${code}.`);
-  if (categorySlugs.has(id)) throw new Error(`${context}: duplicate slug ${id}.`);
-  categoryCodes.add(code);
-  categorySlugs.add(id);
-  const kind = required(row, "kind", context);
-  if (kind !== "drink" && kind !== "food") {
-    throw new Error(`${context}: kind must be drink or food.`);
-  }
-  return {
-    code,
-    id,
-    label: required(row, "label", context),
-    kind,
-    sortOrder: wholeNumber(required(row, "sort_order", context), "sort_order", context),
-  };
-}).sort((left, right) => left.sortOrder - right.sortOrder);
+const categories = categoryRows
+  .map((row, index) => {
+    const context = `categories.csv row ${index + 2}`;
+    const code = required(row, "code", context);
+    const id = required(row, "slug", context);
+    if (!/^[A-Z]$/.test(code))
+      throw new Error(`${context}: code must be one uppercase letter.`);
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id))
+      throw new Error(`${context}: slug must use lowercase kebab-case.`);
+    if (categoryCodes.has(code))
+      throw new Error(`${context}: duplicate code ${code}.`);
+    if (categorySlugs.has(id))
+      throw new Error(`${context}: duplicate slug ${id}.`);
+    categoryCodes.add(code);
+    categorySlugs.add(id);
+    const kind = required(row, "kind", context);
+    if (kind !== "drink" && kind !== "food") {
+      throw new Error(`${context}: kind must be drink or food.`);
+    }
+    return {
+      code,
+      id,
+      label: required(row, "label", context),
+      kind,
+      sortOrder: wholeNumber(
+        required(row, "sort_order", context),
+        "sort_order",
+        context,
+      ),
+      hotSurcharge: optionalPrice(row, "hot_surcharge", context),
+    };
+  })
+  .sort((left, right) => left.sortOrder - right.sortOrder);
 
-const categoryByCode = new Map(categories.map((category) => [category.code, category]));
+const categoryByCode = new Map(
+  categories.map((category) => [category.code, category]),
+);
 const allowedColours = new Set(["peach", "lilac", "butter", "sage", "pink"]);
 const seenIds = new Set();
 const menuRows = readCsv("menu.csv");
@@ -114,26 +142,37 @@ const products = [];
 for (const [index, row] of menuRows.entries()) {
   const context = `menu.csv row ${index + 2}`;
   const id = required(row, "id", context);
-  if (!/^[A-Z][0-9]{2}$/.test(id)) throw new Error(`${context}: id ${id} must match A01, B02 or C12.`);
+  if (!/^[A-Z][0-9]{2}$/.test(id))
+    throw new Error(`${context}: id ${id} must match A01, B02 or C12.`);
   if (seenIds.has(id)) throw new Error(`${context}: duplicate id ${id}.`);
   seenIds.add(id);
 
   const category = categoryByCode.get(id[0]);
-  if (!category) throw new Error(`${context}: ${id[0]} is not defined in categories.csv.`);
-  const active = booleanValue(required(row, "active", context), "active", context);
+  if (!category)
+    throw new Error(`${context}: ${id[0]} is not defined in categories.csv.`);
+  const active = booleanValue(
+    required(row, "active", context),
+    "active",
+    context,
+  );
   if (!active) continue;
 
   const colour = required(row, "colour", context);
-  if (!allowedColours.has(colour)) throw new Error(`${context}: unsupported colour ${colour}.`);
-  const rawPrice = row.price?.trim() ?? "";
-  const price = rawPrice === "" ? null : Number(rawPrice);
-  if (price !== null && (!Number.isFinite(price) || price < 0)) {
-    throw new Error(`${context}: price must be a non-negative number or blank.`);
+  if (!allowedColours.has(colour))
+    throw new Error(`${context}: unsupported colour ${colour}.`);
+  const price = optionalPrice(row, "price", context);
+  const largePrice = optionalPrice(row, "large_price", context);
+  const icedPrice = optionalPrice(row, "iced_price", context);
+  if ((largePrice !== null || icedPrice !== null) && price === null) {
+    throw new Error(
+      `${context}: a base price is required when variant prices are set.`,
+    );
   }
 
   const imageName = `${id}.png`;
   const imagePath = path.join(sourceImages, imageName);
-  if (!fs.existsSync(imagePath)) throw new Error(`${context}: missing CMS/images/${imageName}.`);
+  if (!fs.existsSync(imagePath))
+    throw new Error(`${context}: missing CMS/images/${imageName}.`);
 
   products.push({
     id,
@@ -141,14 +180,29 @@ for (const [index, row] of menuRows.entries()) {
     category: category.id,
     description: required(row, "description", context),
     price,
+    largePrice,
+    icedPrice,
     image: `/menu-images/${imageName}`,
     colour,
     tag: required(row, "tag", context),
-    favourite: booleanValue(required(row, "featured", context), "featured", context),
-    hotAvailable: booleanValue(required(row, "hot_available", context), "hot_available", context),
+    favourite: booleanValue(
+      required(row, "featured", context),
+      "featured",
+      context,
+    ),
+    hotAvailable: booleanValue(
+      required(row, "hot_available", context),
+      "hot_available",
+      context,
+    ),
+    hotSurcharge: category.hotSurcharge,
     isDrink: category.kind === "drink",
     allergens: row.allergens?.trim() ?? "",
-    sortOrder: wholeNumber(required(row, "sort_order", context), "sort_order", context),
+    sortOrder: wholeNumber(
+      required(row, "sort_order", context),
+      "sort_order",
+      context,
+    ),
   });
 }
 
@@ -158,18 +212,31 @@ products.sort((left, right) => {
   return leftCategory - rightCategory || left.sortOrder - right.sortOrder;
 });
 
-const publishedCategoryIds = new Set(products.map((product) => product.category));
-const publishedCategories = categories.filter((category) => publishedCategoryIds.has(category.id));
-if (products.length === 0) throw new Error("CMS/menu.csv has no active menu items.");
+const publishedCategoryIds = new Set(
+  products.map((product) => product.category),
+);
+const publishedCategories = categories.filter((category) =>
+  publishedCategoryIds.has(category.id),
+);
+if (products.length === 0)
+  throw new Error("CMS/menu.csv has no active menu items.");
 
 if (!checkOnly) {
   fs.rmSync(publicImages, { recursive: true, force: true });
   fs.mkdirSync(publicImages, { recursive: true });
   for (const product of products) {
-    fs.copyFileSync(path.join(sourceImages, `${product.id}.png`), path.join(publicImages, `${product.id}.png`));
+    fs.copyFileSync(
+      path.join(sourceImages, `${product.id}.png`),
+      path.join(publicImages, `${product.id}.png`),
+    );
   }
   fs.mkdirSync(path.dirname(generatedFile), { recursive: true });
-  fs.writeFileSync(generatedFile, `${JSON.stringify({ categories: publishedCategories, products }, null, 2)}\n`);
+  fs.writeFileSync(
+    generatedFile,
+    `${JSON.stringify({ categories: publishedCategories, products }, null, 2)}\n`,
+  );
 }
 
-console.log(`CMS valid: ${products.length} active items across ${publishedCategories.length} categories${checkOnly ? "." : "; website data regenerated."}`);
+console.log(
+  `CMS valid: ${products.length} active items across ${publishedCategories.length} categories${checkOnly ? "." : "; website data regenerated."}`,
+);

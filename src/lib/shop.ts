@@ -18,6 +18,7 @@ export type MenuCategory = {
   label: string;
   kind: "drink" | "food";
   sortOrder: number;
+  hotSurcharge?: number | null;
 };
 
 export type Product = {
@@ -26,11 +27,14 @@ export type Product = {
   category: Category;
   description: string;
   price: number | null;
+  largePrice?: number | null;
+  icedPrice?: number | null;
   image: string | null;
   colour: string;
   tag: string;
   favourite: boolean;
   hotAvailable?: boolean;
+  hotSurcharge?: number | null;
   isDrink?: boolean;
   allergens?: string;
   sortOrder?: number;
@@ -39,10 +43,31 @@ export type Product = {
 export type CartOrderLine = {
   product: Product;
   quantity: number;
+  size: "Medium" | "Large" | null;
   temperature: "Iced" | "Hot";
   sweetness: string;
   notes: string;
 };
+
+export function itemPrice(
+  product: Product,
+  size: CartOrderLine["size"] = null,
+  temperature: CartOrderLine["temperature"] = "Iced",
+): number | null {
+  const basePrice =
+    size === "Large" && product.largePrice != null
+      ? product.largePrice
+      : temperature === "Iced" && product.icedPrice != null
+        ? product.icedPrice
+        : product.price;
+  if (basePrice == null) return null;
+  return (
+    basePrice +
+    (temperature === "Hot" && product.hotSurcharge != null
+      ? product.hotSurcharge
+      : 0)
+  );
+}
 
 export const products: Product[] = [
   {
@@ -176,20 +201,27 @@ export function cartMessage(lines: CartOrderLine[]): string {
       line.product.isDrink ?? line.product.category !== "cafe-treats";
     return [
       `${index + 1}. ${count} x ${line.product.name} (${line.product.id})`,
-      ...(drink
-        ? [
-            `   Temperature: ${line.product.hotAvailable ? line.temperature : "Iced"}`,
-            `   Sweetness: ${line.sweetness}`,
-          ]
+      ...(line.size ? [`   Size: ${line.size}`] : []),
+      ...(drink && line.product.hotAvailable
+        ? [`   Temperature: ${line.temperature}`]
+        : []),
+      ...(drink &&
+      ["bubble-tea", "fruit-tea", "slushies"].includes(line.product.category)
+        ? [`   Sweetness: ${line.sweetness}`]
         : []),
       ...(line.notes.trim() ? [`   Notes: ${line.notes.trim()}`] : []),
     ];
   });
   const knownTotal = lines.reduce(
-    (total, line) => total + (line.product.price ?? 0) * line.quantity,
+    (total, line) =>
+      total +
+      (itemPrice(line.product, line.size, line.temperature) ?? 0) *
+        line.quantity,
     0,
   );
-  const hasKnownPrice = lines.some((line) => line.product.price !== null);
+  const hasKnownPrice = lines.some(
+    (line) => itemPrice(line.product, line.size, line.temperature) !== null,
+  );
 
   return [
     "Hi No.9! I'd like to order:",
