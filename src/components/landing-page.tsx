@@ -939,7 +939,7 @@ export function LandingPage({
                 </a>
               </div>
               <div className="hero-small">
-                <Heart size={17} /> Big on flavour. Small on ordinary.
+                <Heart size={17} /> Brewed to perfection, bubbled for happiness
               </div>
             </div>
             <div className="hero-art combined-hero-art">
@@ -1498,8 +1498,9 @@ export function LandingPage({
           <div className="footer-top">
             <Brand footer />
             <p>
-              A little cup of happy.
-              <br />A whole lot of No.9.
+              Brewed to perfection,
+              <br />
+              bubbled for happiness
             </p>
             <div className="footer-links">
               <a href="#menu">The menu</a>
