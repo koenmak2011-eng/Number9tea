@@ -3220,7 +3220,8 @@ body:has(.combined-home) {
     font-size: 19px;
   }
   .combined-home .splash-heart {
-    top: 48%;
+    top: auto;
+    bottom: 22%;
     left: 7%;
     width: 55px;
     height: 55px;
