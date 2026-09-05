@@ -3034,6 +3034,228 @@ body:has(.combined-home) {
     #263554;
 }
 
+.food-carousel-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 110px 0 95px;
+  color: #263554;
+  background: #c8b6ff;
+}
+.food-carousel-section::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 38px;
+  left: 46%;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  background: #c8f25d;
+  transform: rotate(-8deg);
+}
+.food-carousel-section::after {
+  content: "09";
+  position: absolute;
+  z-index: -1;
+  right: -25px;
+  bottom: -75px;
+  color: rgba(38, 53, 84, 0.07);
+  font-size: 250px;
+  font-weight: 900;
+  letter-spacing: -0.1em;
+}
+.food-carousel-intro {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: end;
+  gap: 70px;
+}
+.food-carousel-intro .eyebrow {
+  color: #2458c6;
+}
+.food-carousel-intro h2 {
+  margin-top: 16px;
+  font-size: clamp(62px, 7.2vw, 108px);
+  line-height: 0.84;
+  letter-spacing: -0.075em;
+}
+.food-carousel-intro > p {
+  max-width: 410px;
+  padding-bottom: 7px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+.food-carousel-window {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  padding: 66px 0 52px;
+}
+.food-carousel-track {
+  display: flex;
+  width: max-content;
+  animation: food-carousel 48s linear infinite;
+  will-change: transform;
+}
+.food-carousel-group {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding-right: 28px;
+}
+.food-carousel-window:hover .food-carousel-track,
+.food-carousel-window:focus-within .food-carousel-track,
+.food-carousel-section.is-paused .food-carousel-track {
+  animation-play-state: paused;
+}
+.food-carousel-card {
+  width: clamp(230px, 21vw, 310px);
+  flex: none;
+  padding: 12px 12px 18px;
+  color: #263554;
+  background: #fff9e8;
+  border: 2px solid #263554;
+  border-radius: 4px;
+  box-shadow: 9px 10px 0 rgba(38, 53, 84, 0.18);
+  text-align: left;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.food-angle-1 {
+  transform: rotate(-4deg);
+}
+.food-angle-2 {
+  transform: rotate(3deg) translateY(12px);
+}
+.food-angle-3 {
+  transform: rotate(-2deg) translateY(-7px);
+}
+.food-angle-4 {
+  transform: rotate(4.5deg) translateY(7px);
+}
+.food-angle-5 {
+  transform: rotate(-3deg) translateY(10px);
+}
+.food-carousel-card:hover,
+.food-carousel-card:focus-visible {
+  z-index: 3;
+  transform: rotate(0) translateY(-9px);
+  box-shadow: 13px 15px 0 rgba(38, 53, 84, 0.22);
+}
+.food-carousel-image {
+  position: relative;
+  display: grid;
+  width: 100%;
+  aspect-ratio: 1.12;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.food-carousel-image img {
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+.food-carousel-image > span {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  padding: 6px 8px;
+  color: white;
+  background: #263554;
+  border-radius: 99px;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+.food-carousel-copy {
+  display: grid;
+  min-width: 0;
+  padding: 15px 5px 0;
+}
+.food-carousel-copy small {
+  color: #ff668f;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.food-carousel-copy strong {
+  margin-top: 7px;
+  font-size: 19px;
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+.food-carousel-copy em {
+  margin-top: 9px;
+  color: #2458c6;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 850;
+}
+.food-carousel-foot {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 10px;
+  font-weight: 750;
+}
+.food-carousel-foot button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  color: #263554;
+  background: transparent;
+  border: 1px solid #263554;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 800;
+}
+.food-keyword {
+  position: absolute;
+  z-index: 1;
+  color: rgba(38, 53, 84, 0.16);
+  font-size: clamp(54px, 8vw, 118px);
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  line-height: 1;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.keyword-cozy {
+  top: 32px;
+  right: 3%;
+  transform: rotate(7deg);
+}
+.keyword-playful {
+  top: 46%;
+  left: -3%;
+  transform: rotate(-8deg);
+}
+.keyword-local {
+  right: 8%;
+  bottom: 22%;
+  transform: rotate(-5deg);
+}
+.keyword-fresh {
+  left: 28%;
+  bottom: 16px;
+  transform: rotate(4deg);
+}
+@keyframes food-carousel {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .connect-section {
   padding: 125px 0 135px;
   color: white;
@@ -3239,6 +3461,62 @@ body:has(.combined-home) {
     bottom: 39%;
     font-size: 39px;
   }
+  .food-carousel-section {
+    padding: 82px 0 72px;
+  }
+  .food-carousel-intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .food-carousel-intro h2 {
+    font-size: clamp(57px, 16vw, 88px);
+  }
+  .food-carousel-intro > p {
+    max-width: 470px;
+    font-size: 13px;
+  }
+  .food-carousel-window {
+    padding-block: 52px 43px;
+    overflow-x: auto;
+    scroll-padding-inline: 20px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+  .food-carousel-window::-webkit-scrollbar {
+    display: none;
+  }
+  .food-carousel-track {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+  .food-carousel-group {
+    gap: 20px;
+    padding-right: 20px;
+  }
+  .food-carousel-card {
+    width: 250px;
+    scroll-snap-align: center;
+  }
+  .food-carousel-foot {
+    align-items: flex-start;
+  }
+  .food-carousel-foot button {
+    display: none;
+  }
+  .food-carousel-foot::after {
+    content: "Swipe to explore →";
+    flex: none;
+    font-size: 10px;
+    font-weight: 850;
+  }
+  .keyword-playful {
+    top: 51%;
+  }
+  .keyword-local {
+    right: -2%;
+    bottom: 20%;
+  }
   .connect-section {
     padding-block: 85px 95px;
   }
@@ -3286,6 +3564,35 @@ body:has(.combined-home) {
   .combined-home .splash-spark {
     display: none;
   }
+  .food-carousel-section::before {
+    top: 28px;
+    left: auto;
+    right: 21px;
+    width: 70px;
+    height: 70px;
+  }
+  .food-carousel-intro h2 {
+    font-size: 16vw;
+  }
+  .food-carousel-card {
+    width: min(74vw, 245px);
+  }
+  .food-carousel-copy strong {
+    font-size: 17px;
+  }
+  .food-carousel-foot {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .food-keyword {
+    font-size: 48px;
+  }
+  .keyword-cozy {
+    top: 24px;
+  }
+  .keyword-fresh {
+    left: 47%;
+  }
   .combined-home .menu-section::before {
     right: -135px;
   }
@@ -3295,5 +3602,12 @@ body:has(.combined-home) {
   .social-link-list strong,
   .delivery-link-list strong {
     font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .food-carousel-track {
+    animation: none;
+    transform: none;
   }
 }

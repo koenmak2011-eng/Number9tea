@@ -300,6 +300,110 @@ function ProductCard({
   );
 }
 
+function FoodCarousel({
+  products,
+  paused,
+  onPause,
+  onInteract,
+  onSelect,
+}: {
+  products: Product[];
+  paused: boolean;
+  onPause: () => void;
+  onInteract: () => void;
+  onSelect: (product: Product) => void;
+}) {
+  return (
+    <section
+      className={`food-carousel-section ${paused ? "is-paused" : ""}`}
+      aria-labelledby="food-carousel-title"
+    >
+      <span className="food-keyword keyword-cozy" aria-hidden="true">
+        Cozy
+      </span>
+      <span className="food-keyword keyword-playful" aria-hidden="true">
+        Playful
+      </span>
+      <span className="food-keyword keyword-local" aria-hidden="true">
+        Local
+      </span>
+      <span className="food-keyword keyword-fresh" aria-hidden="true">
+        Fresh
+      </span>
+
+      <div className="food-carousel-intro section-width reveal">
+        <div>
+          <p className="eyebrow">SWEET, WARM & WORTH SHARING</p>
+          <h2 id="food-carousel-title">
+            Come hungry.
+            <br />
+            Leave happy.
+          </h2>
+        </div>
+        <p>
+          Bubble waffles, soft serve and café treats made for the group chat.
+          Tap a favourite to add it to your order.
+        </p>
+      </div>
+
+      <div className="food-carousel-window">
+        <div className="food-carousel-track">
+          {[0, 1].map((group) => (
+            <div
+              className="food-carousel-group"
+              key={group}
+              aria-hidden={group === 1}
+            >
+              {products.map((product, index) => (
+                <button
+                  className={`food-carousel-card food-angle-${(index % 5) + 1}`}
+                  key={`${group}-${product.id}`}
+                  onClick={() => onSelect(product)}
+                  onPointerDown={onInteract}
+                  onFocus={onInteract}
+                  tabIndex={group === 1 ? -1 : 0}
+                  aria-label={`Choose ${product.name}`}
+                >
+                  <span className={`food-carousel-image ${product.colour}`}>
+                    {product.image ? (
+                      <Image
+                        src={product.image}
+                        alt=""
+                        fill
+                        sizes="(max-width: 640px) 230px, 300px"
+                      />
+                    ) : (
+                      <Cake size={84} weight="duotone" />
+                    )}
+                    <span>{product.id}</span>
+                  </span>
+                  <span className="food-carousel-copy">
+                    <small>{product.tag}</small>
+                    <strong>{product.name}</strong>
+                    <em>{priceLabel(product)}</em>
+                  </span>
+                </button>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="food-carousel-foot section-width">
+        <span>Made for catch-ups, cravings and one-more-bite moments.</span>
+        <button type="button" onClick={onPause} aria-pressed={paused}>
+          {paused ? (
+            <Play size={15} weight="fill" />
+          ) : (
+            <Pause size={15} weight="fill" />
+          )}
+          {paused ? "Play carousel" : "Pause carousel"}
+        </button>
+      </div>
+    </section>
+  );
+}
+
 function OrderDialog({
   product,
   onClose,
@@ -734,6 +838,7 @@ export function LandingPage({
   const [cartOpen, setCartOpen] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [marqueePaused, setMarqueePaused] = useState(false);
+  const [foodCarouselPaused, setFoodCarouselPaused] = useState(false);
   const [openBox, setOpenBox] = useState<number | null>(null);
   const [activeBox, setActiveBox] = useState(0);
   const categories: { id: Category; label: string }[] = [
@@ -741,6 +846,9 @@ export function LandingPage({
     ...menuCategories.map(({ id, label }) => ({ id, label })),
   ];
   const visibleProducts = filterProducts(category, menuProducts);
+  const foodProducts = menuProducts.filter((product) =>
+    ["waffles", "ice-cream", "cafe-treats"].includes(product.category),
+  );
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const addToCart = (line: CartOrderLine) => {
@@ -1073,6 +1181,16 @@ export function LandingPage({
               </OrderLink>
             </div>
           </section>
+
+          {foodProducts.length > 0 && (
+            <FoodCarousel
+              products={foodProducts}
+              paused={foodCarouselPaused}
+              onPause={() => setFoodCarouselPaused((current) => !current)}
+              onInteract={() => setFoodCarouselPaused(true)}
+              onSelect={setSelectedProduct}
+            />
+          )}
 
           <section
             id="little-finds"
