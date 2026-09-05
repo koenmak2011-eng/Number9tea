@@ -492,6 +492,7 @@
   background: var(--club-yellow);
 }
 .club-tile-copy {
+  min-width: 0;
   padding: 29px 12px 25px 29px;
   display: flex;
   flex-direction: column;
@@ -505,6 +506,7 @@
   letter-spacing: -0.045em;
   color: var(--club-navy);
   font-weight: 900;
+  overflow-wrap: anywhere;
 }
 .club-tile-copy p {
   font-size: 11px;
@@ -1131,6 +1133,8 @@
     background: var(--club-cream);
     border-block: 4px solid var(--club-navy);
     box-shadow: 0 14px 0 #172b5230;
+    max-height: calc(100dvh - 92px);
+    overflow-y: auto;
   }
   .club-mobile-nav > a:not(.club-button) {
     display: flex;

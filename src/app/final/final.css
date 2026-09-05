@@ -444,7 +444,7 @@
   right: 24px;
   bottom: 22px;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
   gap: 4px 18px;
   padding: 20px 22px;
@@ -457,6 +457,7 @@
 .stage-copy h3 {
   font-size: 25px;
   letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
 }
 .stage-copy p {
   font-size: 11px;
@@ -474,7 +475,7 @@
 .final-drink-list button {
   width: 100%;
   display: grid;
-  grid-template-columns: 45px 1fr auto;
+  grid-template-columns: 45px minmax(0, 1fr) auto;
   align-items: center;
   gap: 13px;
   padding: 18px 4px;
@@ -1074,6 +1075,8 @@
     color: white;
     background: var(--f-navy);
     box-shadow: 0 16px 25px rgba(16, 43, 82, 0.2);
+    max-height: calc(100dvh - 91px);
+    overflow-y: auto;
   }
   .final-mobile-nav > a:not(.final-button) {
     display: flex;

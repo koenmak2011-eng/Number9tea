@@ -630,11 +630,14 @@ h2 {
   margin-top: 18px;
 }
 .product-info h3 {
+  min-width: 0;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
 }
 .product-price {
+  flex: none;
   font-size: 14px;
   color: var(--red);
   font-weight: 600;
@@ -1482,11 +1485,13 @@ h2 {
   mix-blend-mode: multiply;
 }
 .dialog-copy {
+  min-width: 0;
   padding: 45px 30px 30px;
 }
 .dialog-copy h2 {
   font-size: 33px;
   margin: 12px 0;
+  overflow-wrap: anywhere;
 }
 .dialog-copy > p:not(.eyebrow) {
   font-size: 12px;
@@ -1662,9 +1667,13 @@ textarea {
   font-weight: 900;
   letter-spacing: 0.12em;
 }
+.cart-item-copy {
+  min-width: 0;
+}
 .cart-item-copy h3 {
   font-size: 18px;
   letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
 }
 .cart-item-copy p {
   margin-top: 5px;
@@ -1862,8 +1871,14 @@ textarea {
   .product-info h3 {
     font-size: 14px;
   }
+  .product-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
   .product-price {
     font-size: 12px;
+    text-align: left;
   }
   .section-heading {
     gap: 35px;
@@ -2137,6 +2152,8 @@ textarea {
     width: 100%;
     background: var(--cream);
     box-shadow: 0 16px 20px #42292210;
+    max-height: calc(100dvh - 88px);
+    overflow-y: auto;
   }
   .mobile-nav > a:not(.button) {
     display: flex;
@@ -2711,6 +2728,18 @@ textarea {
   .nav-order {
     margin-right: 7px;
   }
+  .product-grid,
+  .product-grid.count-2,
+  .product-grid.count-3 {
+    grid-template-columns: 1fr;
+  }
+  .product-grid.count-3 .product-card:last-child {
+    grid-column: auto;
+  }
+  .product-grid.count-3 .product-card:last-child .product-image,
+  .product-grid.count-2 .product-image {
+    aspect-ratio: 1.25;
+  }
   .surprise-panel {
     padding-inline: 12px;
   }
@@ -2895,7 +2924,7 @@ body:has(.combined-home) {
 .combined-home .combined-hero .hero-handwriting {
   top: auto;
   right: 10%;
-  bottom: 5%;
+  bottom: 16%;
   width: max-content;
   color: #2458c6;
   font-size: 24px;
@@ -3078,7 +3107,7 @@ body:has(.combined-home) {
 .social-link-list a,
 .delivery-link-list a {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 16px;
   padding: 19px 4px;
@@ -3086,6 +3115,10 @@ body:has(.combined-home) {
   transition:
     padding 0.2s ease,
     background 0.2s ease;
+}
+.social-link-list a > span,
+.delivery-link-list a > span {
+  min-width: 0;
 }
 .social-link-list a:last-child,
 .delivery-link-list a:last-child {
@@ -3183,7 +3216,7 @@ body:has(.combined-home) {
   }
   .combined-home .combined-hero .hero-handwriting {
     right: 7%;
-    bottom: 6%;
+    bottom: 19%;
     font-size: 19px;
   }
   .combined-home .splash-heart {
